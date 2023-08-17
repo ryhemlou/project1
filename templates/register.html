@@ -1,0 +1,38 @@
+{% load socialaccount %}
+
+<h1>Sign Up Below</h1>
+
+<style>
+    h5{
+        color: red;
+    }
+</style>
+
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+
+
+<form method="POST" action="register">
+    {% csrf_token %}
+    <p>Username:</p>
+    <input type="text" name="username" />
+
+    <p>Email:</p>
+    <input type="email" name="email" />
+
+    <p>Password:</p>
+    <input type="password" name="password" />
+
+    <p>Repeat Password:</p>
+    <input type="password" name="password2" /><br>
+
+    <input type="submit" value="Submit"/><br>
+
+    {% if user.is_authenticated %}
+        <p>Welcome, You are logged in as {{ user.username }}</p>
+    {% else %}
+        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+    {% endif %}
+
+</form>

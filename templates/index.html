@@ -1,0 +1,33 @@
+{% load static %}
+
+{% load socialaccount %}
+<html>
+<body>
+{% if user.is_authenticated %}
+  <p>Welcome, You are logged in as {{ user.username }}</p>
+
+{% endif %}
+</body>
+</html>
+
+
+<form method="POST" action="counter">
+    {% csrf_token %}
+    <textarea name="text" rows="15" cols="100"></textarea><br>
+    <input type="submit" value="Submit"/>
+</form>
+
+
+
+{% for feature in features %}
+<div class="row icon-boxes">
+    <div class="icon-box">
+        <h1 class="title"><a href="">{{feature.name}}</a></h1>
+        <p class="description">{{feature.details}}</p>
+        {% if feature.name == 'Quick' %}
+        <p>This feature says our site is quick</p>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+
